@@ -6,35 +6,36 @@ using System.Linq;
 
 namespace seamless.opc.Model
 {
+    /// <summary>
+    /// Represents a part of an <see cref="OpcPackage"/>.
+    /// </summary>
     public class OpcPackagePart
     {
         private readonly PackagePart _part;
 
         /// <summary>
-        /// 
+        /// The owning <see cref="OpcPackage"/>
         /// </summary>
         public OpcPackage Package { get; private set; }
 
         /// <summary>
-        /// 
+        /// THe compression option used
         /// </summary>
         public CompressionOption CompressionOption { get; set; }
 
         /// <summary>
-        /// 
+        /// The actual content type of the part
         /// </summary>
         public string ContentType { get; set; }
 
         /// <summary>
-        /// 
+        /// The URI of the part
         /// </summary>
         public Uri Uri { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new package part from a given <see cref="OpcPackage"/> and a <see cref="PackagePart"/>.
         /// </summary>
-        /// <param name="package"></param>
-        /// <param name="part"></param>
         internal OpcPackagePart(OpcPackage package, PackagePart part)
         {
             Package = package;

@@ -13,7 +13,7 @@ namespace seamless.opc.Model
         private readonly Package _package;
 
         /// <summary>
-        /// 
+        /// The File containing the package
         /// </summary>
         public FileSystemInfo File { get; set; }
 
@@ -23,17 +23,17 @@ namespace seamless.opc.Model
         public PackageProperties CoreProperties { get; private set; }
 
         /// <summary>
-        /// 
+        /// List of all Parts of this package
         /// </summary>
         public List<OpcPackagePart> Parts { get; set; }
 
         /// <summary>
-        /// 
+        /// Currently open packages
         /// </summary>
         internal static HashSet<OpcPackage> OpenPackages { get; private set; }
 
         /// <summary>
-        /// 
+        /// Indicates whether this package is open or closed
         /// </summary>
         public bool IsOpen { get; set; }
 
