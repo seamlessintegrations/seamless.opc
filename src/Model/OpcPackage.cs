@@ -13,7 +13,7 @@ namespace seamless.opc.Model
         private readonly Package _package;
 
         /// <summary>
-        /// 
+        /// The File containing the package
         /// </summary>
         public FileSystemInfo File { get; set; }
 
@@ -23,17 +23,17 @@ namespace seamless.opc.Model
         public PackageProperties CoreProperties { get; private set; }
 
         /// <summary>
-        /// 
+        /// List of all Parts of this package
         /// </summary>
         public List<OpcPackagePart> Parts { get; set; }
 
         /// <summary>
-        /// 
+        /// Currently open packages
         /// </summary>
         internal static HashSet<OpcPackage> OpenPackages { get; private set; }
 
         /// <summary>
-        /// 
+        /// Indicates whether this package is open or closed
         /// </summary>
         public bool IsOpen { get; set; }
 
@@ -58,6 +58,25 @@ namespace seamless.opc.Model
                             select new OpcPackagePart(this, part)).ToList();
 
             OpenPackages.Add(this);
+        }
+
+        /// <summary>
+        /// Returns the relation with the given identifier, if any.
+        /// </summary>
+        /// <returns></returns>
+        internal OpcRelationship GetRelation(string id)
+        {
+            return new OpcRelationship(this, _package.GetRelationship(id));
+        }
+
+        /// <summary>
+        /// Returns all relations of this package part
+        /// </summary>
+        /// <returns></returns>
+        internal IEnumerable<OpcRelationship> GetRelations()
+        {
+            return from rel in _package.GetRelationships()
+                   select new OpcRelationship(this, rel);
         }
 
         /// <summary>
