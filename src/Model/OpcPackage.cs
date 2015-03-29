@@ -20,7 +20,7 @@ namespace seamless.opc.Model
         /// <summary>
         /// Gets the core properties of the package
         /// </summary>
-        public PackageProperties Properties { get; private set; }
+        public PackageProperties CoreProperties { get; private set; }
 
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace seamless.opc.Model
             File = file;
             IsOpen = true;
             
-            Properties = package.PackageProperties;
+            CoreProperties = package.PackageProperties;
             Parts = (from part in _package.GetParts()
                             select new OpcPackagePart(this, part)).ToList();
 

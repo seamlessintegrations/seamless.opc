@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
+using System.Linq;
 
 namespace seamless.opc.Model
 {
@@ -49,6 +51,25 @@ namespace seamless.opc.Model
         internal Stream GetStream()
         {
             return _part.GetStream();
+        }
+
+        /// <summary>
+        /// Returns the relation with the given identifier, if any.
+        /// </summary>
+        /// <returns></returns>
+        internal OpcRelationship GetRelation(string id)
+        {
+            return new OpcRelationship(this, _part.GetRelationship(id));
+        }
+
+        /// <summary>
+        /// Returns all relations of this package part
+        /// </summary>
+        /// <returns></returns>
+        internal IEnumerable<OpcRelationship> GetRelations()
+        {
+            return from rel in _part.GetRelationships()
+                   select new OpcRelationship(this, rel);
         }
     }
 }

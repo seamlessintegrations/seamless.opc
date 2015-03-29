@@ -43,10 +43,12 @@
     <Compile Include="Cmdlets\CloseOpcPackageCommand.cs" />
     <Compile Include="Cmdlets\GetOpcPackageCommand.cs" />
     <Compile Include="Cmdlets\GetOpcPartStreamCommand.cs" />
+    <Compile Include="Cmdlets\GetOpcRelationshipCommand.cs" />
     <Compile Include="Cmdlets\OpenOpcPackageCommand.cs" />
     <Compile Include="Cmdlets\ReadOpcStreamCommand.cs" />
     <Compile Include="Model\OpcPackage.cs" />
     <Compile Include="Model\OpcPackagePart.cs" />
+    <Compile Include="Model\OpcRelationship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
