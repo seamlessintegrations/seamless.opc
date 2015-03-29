@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
+using System.Linq;
 
 namespace seamless.opc.Model
 {
@@ -11,14 +12,30 @@ namespace seamless.opc.Model
     {
         private readonly Package _package;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public FileSystemInfo File { get; set; }
 
         /// <summary>
         /// Gets the core properties of the package
         /// </summary>
-        public PackageProperties PackageProperties { get; private set; }
+        public PackageProperties Properties { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<OpcPackagePart> Parts { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal static HashSet<OpcPackage> OpenPackages { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsOpen { get; set; }
 
         static OpcPackage()
         {
@@ -34,7 +51,11 @@ namespace seamless.opc.Model
         {
             _package = package;
             File = file;
-            PackageProperties = package.PackageProperties;
+            IsOpen = true;
+            
+            Properties = package.PackageProperties;
+            Parts = (from part in _package.GetParts()
+                            select new OpcPackagePart(this, part)).ToList();
 
             OpenPackages.Add(this);
         }
@@ -46,6 +67,7 @@ namespace seamless.opc.Model
         {
             _package.Close();
             OpenPackages.Remove(this);
+            IsOpen = false;
         }
     }
 }

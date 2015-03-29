@@ -70,7 +70,7 @@ namespace seamless.opc.Cmdlets
                     // extract document.xml from zip
                     try
                     {
-                        var package = Package.Open(file);
+                        var package = Package.Open(file, FileMode.Open, FileAccess.ReadWrite);
                         WriteObject(new OpcPackage(package, new FileInfo(file)));
                     }
                     catch (Exception e)
