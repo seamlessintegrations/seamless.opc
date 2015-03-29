@@ -61,6 +61,25 @@ namespace seamless.opc.Model
         }
 
         /// <summary>
+        /// Returns the relation with the given identifier, if any.
+        /// </summary>
+        /// <returns></returns>
+        internal OpcRelationship GetRelation(string id)
+        {
+            return new OpcRelationship(this, _package.GetRelationship(id));
+        }
+
+        /// <summary>
+        /// Returns all relations of this package part
+        /// </summary>
+        /// <returns></returns>
+        internal IEnumerable<OpcRelationship> GetRelations()
+        {
+            return from rel in _package.GetRelationships()
+                   select new OpcRelationship(this, rel);
+        }
+
+        /// <summary>
         /// Closes the underlying <see cref="Package"/>.
         /// </summary>
         public void Close()
